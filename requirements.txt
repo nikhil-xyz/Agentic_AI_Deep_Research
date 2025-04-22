@@ -8,3 +8,4 @@ python-dotenv
 langchain-groq
 arxiv
 wikipedia
+streamlit
