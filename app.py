@@ -13,6 +13,7 @@ from langgraph.graph.message import add_messages
 from langchain_core.messages import AnyMessage, HumanMessage
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.graph import START, END
+from utilities import State, LLMNode
 
 
 # Load environment variables from .env file
@@ -38,21 +39,8 @@ tools = [tavily]
 llm_with_tools = llm.bind_tools(tools)
 
 
-class State(TypedDict):
-    # Messages have the type "list". The `add_messages` function
-    # in the annotation defines how this state key should be updated
-    # (in this case, it appends messages to the list, rather than overwriting them)
-    messages: Annotated[list, add_messages]
-
-
 graph_builder = StateGraph(State)
 
-
-class LLMNode:
-    def __init__(self, llm):
-        self.llm = llm
-    def __call__(self, state:State):
-        return {"messages": [self.llm.invoke(state['messages'])]}
 
 # Creating nodes for the graph  
 llm_node = LLMNode(llm_with_tools)
@@ -67,11 +55,9 @@ graph_builder.add_edge("tools", "llm")
 
 agent = graph_builder.compile()
 
-messages = agent.invoke({"messages":HumanMessage(content=question)})
-# for m in messages['messages']:
-#     m.pretty_print()
 
-messages['messages'][3].pretty_print()
-# st.write(result)
-# print(result)
+# Generating the response using the agent
+if st.button('Generate') and question: 
+    messages = agent.invoke({"messages":HumanMessage(content=question)})
+    st.write(messages['messages'][3].content)
 
