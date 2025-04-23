@@ -16,4 +16,4 @@ COPY ./requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 # RUN python main.py
-CMD ["streamlit", "run", "app.py", "–server.port=8080", "–server.address=0.0.0.0"]
+CMD ["streamlit", "run", "app.py", "–server.port=8501", "–server.address=0.0.0.0"]
