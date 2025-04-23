@@ -17,9 +17,9 @@ from utilities import State, LLMNode
 
 
 # Load environment variables from .env file
-load_dotenv()
-os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
+# load_dotenv()
+# os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
+# os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 
 # Set the page configuration
 st.title("Agentic System")
@@ -27,11 +27,12 @@ question = st.text_input("Mention your question here")
 
 # Setting up the tool (Tavily) to use it during the data collection 
 tavily = TavilySearchResults(
-    include_image=True
+    include_image=True,
+    api_key=os.getenv("TAVILY_API_KEY")
 )
 
 # Setting up the LLM (Groq) 
-llm = ChatGroq(model='qwen-qwq-32b')
+llm = ChatGroq(model='qwen-qwq-32b', api_key=os.getenv("GROQ_API_KEY"))
 
   
 # Binding the tools with LLM
