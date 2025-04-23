@@ -1,9 +1,12 @@
 
 ---
-title: Agentic_AI_Deep_Research
-emoji: 🐳
-colorFrom: purple
-colorTo: gray
-sdk: docker
-app_port: 8501
+title: AgenticAI
+emoji: 🌖
+colorFrom: indigo
+colorTo: green
+sdk: streamlit
+sdk_version: 1.44.1
+app_file: app.py
+pinned: false
+license: mit
 ---
