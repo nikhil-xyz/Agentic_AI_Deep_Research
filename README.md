@@ -1,8 +1,6 @@
 
-# Deep Research Agentic AI 
-
 ---
-title: AgenticAI
+title: Deep Research AgenticAI
 emoji: 📚
 colorFrom: yellow
 colorTo: purple
